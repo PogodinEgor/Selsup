@@ -13,7 +13,6 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.concurrent.*;
 
@@ -63,7 +62,6 @@ public class CrptApi {
     }
 
     private void sendDocument(Document document, String signature) throws InterruptedException, IOException {
-        System.out.println(Thread.currentThread().getName() + LocalDateTime.now());
         scheduled.schedule(() -> {
 
             String requestBody = null;
@@ -89,8 +87,6 @@ public class CrptApi {
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
-            System.out.println(LocalDateTime.now());
-
 
             int statusCode = response.statusCode();
             if (statusCode == 200) {
@@ -100,7 +96,6 @@ public class CrptApi {
             }
 
             requestSemaphore.release();
-
 
         },getInitialDelay(), getTimeUnit());
 
@@ -162,7 +157,6 @@ public class CrptApi {
         }
 
     }
-
 
 }
 
